@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url('bgimage.jpg');
+  background-image: url('bgimage.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -22,10 +22,11 @@ body {
 table {
   width: 700px;
   border-collapse: collapse;
-  background-color: rgba(245, 255, 245, 0.7); 
+  background-color: rgba(245, 255, 245, 0.7);
 }
 
-th, td {
+th,
+td {
   text-align: left;
   padding-left: 10px;
   padding-right: 10px;
@@ -34,7 +35,7 @@ th, td {
 }
 
 form.inputarea {
-  background-color:rgba(245, 255, 245, 0.7); 
+  background-color: rgba(245, 255, 245, 0.7);
   padding: 10px;
   margin: 5px;
 }

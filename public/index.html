@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="cache-control" content="no-store, no-cache, must-revalidate, max-age=0">
-	<meta http-equiv="expires" content="0">
-	<meta http-equiv="pragma" content="no-cache">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="cache-control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="pragma" content="no-cache">
     <title>Alien Plant watering calculator</title>
-	<script src="jquery-3.7.1.min.js"></script>
-	<script src="app.js" defer></script>
-	<link rel="stylesheet" href="styles.css">
+    <!-- Load minified webpack build files -->
+    <script src="../dist/app.min.js" defer></script>
+    <link rel="stylesheet" href="../dist/styles.min.css">
 </head>
+
 <body>
     <div id="header">
         <h1>Alien Plant watering calculator</h1>
     </div>
-	<div id="videoplayer">
-		<video width="480" height="360" controls autoplay muted loop>
-			<source src="video.mp4" type="video/mp4">
-			Your browser does not support the video tag.
-		</video>
-	</div>
+
+    <!-- Hidden video by default to save bandwidth, user can choose to show it -->
+    <div id="videoplayer" style="display: none;">
+        <button id="toggleVideo" style="margin-bottom: 10px;">Hide Video</button>
+        <!-- Lazy loading video, preload=none saves bandwidth -->
+        <video width="480" height="360" controls muted loop autoplay="true" preload="none" loading="lazy">
+            <source src="video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <!-- Button to show video section -->
+    <div id="videoToggleSection">
+        <button id="showVideoBtn">Show Demo Video</button>
+    </div>
 
     <!-- Form for user input -->
     <form id="inputForm" class="inputarea">
@@ -74,7 +84,7 @@
                     <th>Recommended Fertilizer:</th>
                     <td><span id="recommendedFertilizer"></span></td>
                 </tr>
-            </table>    
+            </table>
         </div>
 
         <!-- Section for displaying statistics -->
@@ -87,7 +97,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        Number of similar plant breeding setups in the data: 
+                        Number of similar plant breeding setups in the data:
                     </td>
                     <td>
                         <span id="similar"></span>
@@ -96,7 +106,7 @@
                 </tr>
                 <tr>
                     <th colspan="4">
-                        Average growth and yiels statistics
+                        Average growth and yields statistics
                     </th>
                 </tr>
                 <tr>
@@ -106,35 +116,57 @@
                     <th>Average Crop Yield:</th>
                 </tr>
                 <tr>
-                    <td>Recommentations followed</td>
+                    <td>Recommendations followed</td>
                     <td><span id="similarwaterCount"></span></td>
                     <td><span id="similarwaterGrowthAverage"></span></td>
                     <td><span id="similarwaterYieldAverage"></span></td>
-                </tr>    
+                </tr>
                 <tr>
                     <td>Less than recommended water was given</td>
                     <td><span id="lesswaterCount"></span></td>
                     <td><span id="lesswaterGrowthAverage"></span></td>
                     <td><span id="lesswaterYieldAverage"></span></td>
-                </tr>   
+                </tr>
                 <tr>
                     <td>More recommended water was given</td>
                     <td><span id="morewaterCount"></span></td>
                     <td><span id="morewaterGrowthAverage"></span></td>
                     <td><span id="morewaterYieldAverage"></span></td>
-                </tr>   
-            </table>    
+                </tr>
+            </table>
         </div>
     </div>
-    <!-- Linking to the JavaScript file -->
-    <script src="app.js"></script>
+
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-          initialize();
+        document.addEventListener("DOMContentLoaded", function () {
+            // Initialize the dropdowns first
+            initialize();
+
+            // Video toggle functionality to save bandwidth
+            const showVideoBtn = document.getElementById('showVideoBtn');
+            const videoplayer = document.getElementById('videoplayer');
+            const videoToggleSection = document.getElementById('videoToggleSection');
+            const toggleVideo = document.getElementById('toggleVideo');
+
+            // Show video when user clicks "Show Demo Video"
+            showVideoBtn.addEventListener('click', function () {
+                // Show video section and hide toggle button
+                videoplayer.style.display = 'block';
+                videoToggleSection.style.display = 'none';
+
+                // Start loading video only when user requests it
+                const video = videoplayer.querySelector('video');
+                video.load();
+            });
+
+            // Hide video when user clicks "Hide Video"
+            toggleVideo.addEventListener('click', function () {
+                // Hide video section and show toggle button again
+                videoplayer.style.display = 'none';
+                videoToggleSection.style.display = 'block';
+            });
         });
-      </script>
+    </script>
 </body>
+
 </html>
-<!--
-    
--->
